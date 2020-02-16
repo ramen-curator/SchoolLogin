@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="style/register-login.css">
+    <script>
+        window.onload = function () {
+            showTime();     //网页一加载就调用showTime()函数；
+        }
+        function checkTime(i) {  //补位处理
+            if (i < 10) {
+                i = "0" + i;     //当秒分小于10时，在左边补0；
+            }
+            return i;
+        }
+        function showTime() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1; //js获取的月份是从0开始；
+            var day = now.getDate();
+            var h = now.getHours();
+            var m = now.getMinutes();
+            var s = now.getSeconds();
+            m = checkTime(m)
+            s = checkTime(s)
+
+            var weekday = new Array(7)
+            weekday[0] = "星期日"
+            weekday[1] = "星期一"
+            weekday[2] = "星期二"
+            weekday[3] = "星期三"
+            weekday[4] = "星期四"
+            weekday[5] = "星期五"
+            weekday[6] = "星期六"
+            var w = weekday[now.getDay()]; //js获取的星期是0~6,0是星期天；
+            document.getElementById("sub-title").innerHTML = "" + year + "年" + month + "月" + day + "日 " + w + "  " + h + ":" + m + ":" + s;
+            t = setTimeout('showTime()', 500)
+        }
+
+        /*function func2(){
+       var obj2 = document.getElementById("ipt2").value;
+       var reg2=/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+        if(!reg2.test(obj2) )
+        {
+            alert('对不起，email格式错误');    
+        }
+        else
+            return true;
+       }   */
+
+        function func3() {
+            var d = document.getElementById("idspan");
+            var obj3 = document.getElementById("ipt1").value;
+            var reg3 = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+            if (!reg3.test(obj3)) {
+                d.innerHTML = "身份证号码格式错误!!";
+                return false;
+            }
+            else
+                d.innerHTML = "身份证号码格式正确!!";
+
+        }
+
+        function func4() {
+            var d4 = document.getElementById("postspan");
+            var obj4 = document.getElementById("ipt3").value;
+            var reg4 = /^[1-9][0-9]{5}$/
+            if (!reg4.test(obj4)) {
+                d4.innerHTML = "邮政编码格式错误!!";
+                return false;
+            }
+            else
+                d4.innerHTML = "邮政编码格式正确!!";
+
+        }
+
+
+        function func5() {
+            var d5 = document.getElementById("datespan");
+            var dat = document.getElementById("ipt4").value();
+            var myDate = new Date();
+            var now = myDate.value();
+
+            if (now < dat) {
+                d5.innerHTML = "日期大于当前日期!!";
+                return false;
+            } else {
+                return true;
+            }
+        }
+            /*function func4() {
+                           var pwd1 = document.getElementById("password").value;
+                           var pwd2 = document.getElementById("password1").value;
+         
+                     <!-- 对比两次输入的密码 -->
+                           if(password != password1) {
+                               alert("两次密码不一致"); 
+                               return false;
+                           }
+                           else {
+                              
+                               return true;
+                           }
+                       }
+         
+         */
+            function same() {
+                var d = document.getElementById("repwdspan");
+                d.innerHTML = "";
+                var pValue = document.getElementById("password").value;
+                if (pValue == "") {
+                    //注意空的表示方法
+
+                    return false;
+                }
+                /** 校验确认密码*/
+                var rpValue = document.getElementById("password1").value;
+                if (rpValue != pValue) {
+                    d.innerHTML = "两次密码输入不一致";
+                    return false;
+                }
+                d.innerHTML = "输入一致!!";
+                return true;
+
+            }
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <div id="box"></div>
+    <div class="cent-box">
+        <div class="cent-box-header">
+            <h1 class="main-title hide">SHOU</h1>
+            <div id="sub-title">显示时间的位置</div>
+        </div>
+        <form name="frm1" action="login.html" method="post" id="signupForm">
+            <div class="cont-main clearfix">
+                <div class="index-tab">
+                    <div class="index-slide-nav">
+                        <a href="login.html">登录</a>
+                        <a href="reg.html" class="active">注册</a>
+                        <div class="slide-bar slide-bar1"></div>
+                    </div>
+                </div>
+
+                <div class="login form">
+                    <div class="group">
+                        <div class="group-ipt user">
+                            <input type="text" name="yhm" id="yhm" class="ipt" placeholder="选择一个用户名" >
+                        </div>
+                        <div class="group-ipt user">
+                            <input type="text" name="sfz" id="sfz" class="ipt1" placeholder="身份证号" >
+                            <span id="idspan" style="color: black "></span>
+                        </div>
+                        <div class="group-ipt user">
+                            <input type="text" name="email" id="email" class="ipt2" placeholder="邮箱地址" 
+                                >
+                        </div>
+
+                        <div class="group-ipt user">
+                            <input type="text" name="yz" id="yz" class="ipt3" placeholder="邮政编码" >
+                            <span id="postspan" style="color: black "></span>
+                        </div>
+                        <div class="group-ipt user">
+                            <input type="text" name="birth" id="birth" class="ipt4" placeholder="出生日期" 
+                                >
+                            <span id="datespan" style="color: black "></span>
+                        </div>
+                        <div class="group-ipt password">
+                            <input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码"
+                                >
+                        </div>
+                        <div class="group-ipt password1">
+                            <input type="password" name="passwordAgain" id="passwordAgain" class="ipt" placeholder="重复密码"
+                                >
+                            <span id="repwdspan" style="color: black"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button">
+                    <a id="submit">注册</a>
+                </div>
+            </div>
+        </form>
+        <div class="footer">
+            <p>注册界面</p>
+            <p><a href="zrong.me">© 2019 上海海洋大学</a></p>
+        </div>
+
+        <script src='js/particles.js' type="text/javascript"></script>
+        <script src='js/background.js' type="text/javascript"></script>
+        <script src='js/jquery.min.js' type="text/javascript"></script>
+        <script src='js/layer/layer.js' type="text/javascript"></script>
+        <script src='js/index.js' type="text/javascript"></script>
+        <script>
+                $("#remember-me").click(function () {
+                    var n = document.getElementById("remember-me").checked;
+                    if (n) {
+                        $(".zt").show();
+                    } else {
+                        $(".zt").hide();
+                    }
+                });
+        </script>
+        <script type="text/javascript" src="resources/js/jquery.js"></script>
+        <script type="text/javascript" src="resources/js/jquery.i18n.properties-1.0.9.js" ></script>
+        <script type="text/javascript" src="resources/js/jquery-ui-1.10.3.custom.js"></script>
+        <script type="text/javascript" src="resources/js/jquery.validate.js"></script>
+        <script type="text/javascript" src="resources/js/md5.js"></script>
+        <script type="text/javascript" src="resources/js/page_regist.js"></script>
+</body>
+
+</html>
